@@ -1,51 +1,52 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavScrollExample() {
+
+import { useNavigate } from 'react-router-dom';
+import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { Navbar, Container, Form, Button, Nav, NavDropdown } from 'react-bootstrap';
+
+function NavBar() {
+  const navigate = useNavigate(); 
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" fixed="top"  bg="primary">
-      <Container fluid>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
+    <Navbar expand="lg" className="bg-body-tertiary" fixed="top" bg="primary">
+      <Container fluid className="px-3">
+        <Navbar.Brand href="#" className="d-flex align-items-center" style={{ paddingLeft: '100px' }}>
+          <span>Needs for you👋</span>
+          <Form className="d-flex ms-4" style={{ width: 'auto' }}>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search for Products"
               className="me-2"
               aria-label="Search"
+              style={{ width: '500px', height: '45px' }} 
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success" style={{ height: '45px' }}>
+              Search
+            </Button>
           </Form>
+        </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center" navbarScroll>
+            <NavDropdown title={<><FaUser className="me-2" />Login</>} id="navbarScrollingDropdown" className="mx-2">
+              {/* Add navigation to Login */}
+              <NavDropdown.Item onClick={() => navigate("/login")}>
+                New Customer Sign Up
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Orders</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Wishlist</NavDropdown.Item>
+            </NavDropdown>
+
+            <Nav.Link href="#action7" className="d-flex align-items-center">
+              <FaShoppingCart className="me-2" />
+              Cart
+            </Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
-export default NavScrollExample;
+export default NavBar;
