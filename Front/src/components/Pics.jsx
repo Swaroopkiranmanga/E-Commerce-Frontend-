@@ -1,6 +1,8 @@
 import React from "react";
 
+
 const Pics = () => {
+ 
   const items = [
     {
       id: 1,
@@ -23,36 +25,42 @@ const Pics = () => {
       src: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/0d75b34f7d8fbcb3.png?q=100", 
     },
     {
-        id: 3,
+        id: 5,
         name: "Flight Boookings",
         src: "https://rukminim1.flixcart.com/flap/80/80/image/71050627a56b4693.png?q=100", 
       },
       {
-        id: 4,
+        id: 6,
         name: "Toys",
         src: "https://rukminim1.flixcart.com/flap/80/80/image/dff3f7adcf3a90c6.png?q=100", 
       },
       {
-        id: 4,
+        id: 7,
         name: "Fashion",
         src: "https://rukminim1.flixcart.com/fk-p-flap/80/80/image/0d75b34f7d8fbcb3.png?q=100", 
       },
       {
-          id: 3,
+          id: 8,
           name: "Flight Boookings",
           src: "https://rukminim1.flixcart.com/flap/80/80/image/71050627a56b4693.png?q=100", 
         },
         {
-          id: 4,
+          id: 9,
           name: "Toys",
           src: "https://rukminim1.flixcart.com/flap/80/80/image/dff3f7adcf3a90c6.png?q=100", 
         },
   ];
+  // This function is called when an image/category is clicked
+  const handleClick = (categoryName) => {
+    console.log(`${categoryName} clicked!`); // Replace this with actual logic, e.g., navigation or other actions
+    // Example: You can trigger navigation or show more details here
+  };
+ 
 
   return (
     <div className="image-grid">
       {items.map((item) => (
-        <div key={item.id} className="image-item">
+        <div key={item.id} className="image-item" >
           <img src={item.src} alt={item.name} className="image" />
           <p className="image-name">{item.name}</p>
         </div>
@@ -66,7 +74,7 @@ const Pics = () => {
             padding: 10px;
             text-align: center;
             padding-bottom:10px;
-            padding-top:71px
+            padding-top:100px
   
           }
 

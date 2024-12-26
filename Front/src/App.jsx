@@ -9,21 +9,26 @@ import Top from './components/Top.jsx';
 import Top2 from './components/Top2.jsx';
 import Top3 from './components/Top3.jsx';
 import Login from './components/Login.jsx'; 
+import Register from './components/Register.jsx';
+
+ 
 
 function App() {
   return (
+    
     <Router>
      
       <NavBar />
 
      
       <Routes>
-      
         <Route
           path="/"
           element={
             <>
-              <Pics />
+              <Pics >
+               
+              </Pics>
               <Carouse />
               <Top />
               <Top2 />
@@ -32,8 +37,13 @@ function App() {
           }
         />
 
-      
-        <Route path="/login" element={<Login />} />
+     
+        <Route path="/login" element={<Login />} >
+        </Route>
+        <Route path="/register" element={<Register />} >
+       
+        </Route>
+        
       </Routes>
     </Router>
   );
