@@ -12,8 +12,8 @@ const CategoryComponent = () => {
     axios
       .get("http://localhost:8081/api/get/categories") // Replace with your backend URL
       .then((response) => {
-        setCategories(response.data.categories);
-        console.log(response.data.categories);
+        console.log(response);
+        setCategories(response.data.category);
         setLoading(false);
       })
       .catch((error) => {
@@ -41,7 +41,7 @@ const CategoryComponent = () => {
           {openDropdown === item.id && (
             <Dropdown show>
               <DropdownMenu>
-                {item.subCategories.map((subItem) => (
+                {item.subCategory.map((subItem) => (
                   <DropdownItem key={subItem.id} as={Link} to={`/products/${subItem.id}`}>
                     {subItem.name}
                   </DropdownItem>

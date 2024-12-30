@@ -6,12 +6,19 @@ function Top3() {
   const func = async () => {
     const res = await axios.get("http://localhost:8081/api/get/categories");
     let newProducts = [];
-    for (const element of res.data.categories) {
-      for (const element1 of element.subCategories) {
-        newProducts = [...newProducts, ...element1.products];
-        setProducts(newProducts);
+    let counter=0;             
+      for (const element of res.data.category) {
+        for (const element1 of element.subCategory) {
+          newProducts = [...newProducts, ...element1.product];
+          counter += element1.product.length;
+          if(counter>=9){
+            newProducts = newProducts.slice(0, 9);
+            break;
+          }
+          setProducts(newProducts)
+          if(counter>=9) break;
+        }
       }
-    }
   };
 
   useEffect(() => {
@@ -28,7 +35,7 @@ function Top3() {
                   width: "100%",
                   height: "200px",
                   backgroundColor: "black",
-                }}
+                }} 
               >
                 <img
                   src={product.img}
