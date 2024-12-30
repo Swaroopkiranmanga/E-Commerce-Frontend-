@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';  // If using react-bootstrap
 import { useNavigate } from "react-router-dom";
 const Register = () => {
   const ref1 = useRef(null);
-  const ref2 = useRef(null);
+  const ref2 = useRef(null);  
   const ref3 = useRef(null);
    const ref4 = useRef(null);
    const ref5 = useRef(null);
@@ -13,7 +13,7 @@ const Register = () => {
 
   const register = async () => {
     try {
-      const res = await axios.post("http://localhost:8081/admin/register", {
+      const res = await axios.post("http://localhost:8081/register", {
         "username": ref1.current.value,
         "password": ref2.current.value,
         "number or email":ref3.current.value,
