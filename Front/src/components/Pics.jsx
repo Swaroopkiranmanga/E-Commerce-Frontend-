@@ -90,7 +90,7 @@ const CategoryComponent = () => {
       
       .then((response) => {
         console.log(response);
-        setCategories(response.data.categories);
+        setCategories(response.data.category);
         setLoading(false);
       })
       .catch((error) => {

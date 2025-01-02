@@ -7,7 +7,7 @@ function Top3() {
     const res = await axios.get("http://localhost:8081/api/get/categories");
     let newProducts = [];
     let counter=0;             
-      for (const element of res.data.categories) {
+      for (const element of res.data.category) {
         for (const element1 of element.subCategory) {
           newProducts = [...newProducts, ...element1.product];
           counter += element1.product.length;
