@@ -8,7 +8,7 @@ const Login = () => {
   const ref2 = useRef(null);
   const navigate = useNavigate();
   
-  const [error, setError] = useState(""); // Error message state
+  const [error, setError] = useState(""); 
 
   const register = () => {
     navigate("/register");
@@ -19,10 +19,9 @@ const Login = () => {
       const username = ref1.current.value;
       const password = ref2.current.value;
       
-      // Check if username and password are provided
       if(!username || !password){
         setError("Both fields are required.");
-        return; // Prevent further execution
+        return;
       }
 
       try {
@@ -36,14 +35,12 @@ const Login = () => {
 
         if (login === "success") {
           const { role, token } = data;
-          console.log(role);
-          window.localStorage.setItem("token", token); // Store token in localStorage
+          window.localStorage.setItem("token", token);
 
-          // Navigate based on role
           if (role === "ROLE_USER") {
-            navigate("/"); // Redirect to homepage
+            navigate("/");
           } else {
-            navigate("/admindashboard"); // Redirect to error page if role doesn't match
+            navigate("/admindashboard");
           }
         } else {
           setError("Invalid login credentials.");
@@ -58,37 +55,41 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className='login1'>
-        <div id="login-right">
-          <h1>Login</h1>
-          <div className="login-right-content">
-            <label className='label1'>Username</label>
-            <br />
-            <input
-              type="text" ref={ref1}
-              placeholder="Enter username"
-              className="login-input"
-            />
-            <br /><br />
-            <label className='label1'>Password</label>
-            <br />
-            <input
-              type="password"
-              ref={ref2}
-              placeholder="Enter Password"
-              className="login-input"
-            />
-            <br /><br />
-            {/* Display error if it exists */}
-            {error && <div className="error-message">{error}</div>}
-            <button className="login-button" onClick={login}><b>Login</b></button>
-            <br /><br></br><br></br>
-            <button className="login-button" onClick={register}><b>Register</b></button>
+    <div className='login1'>
+      <div id="login-right">
+        <h1>Login</h1>
+        <div className="login-right-content">
+          <div className="input-wrapper">
+            <label className="label1">Username</label>
+            <div className="input-with-icon">
+              <span className="input-icon">&#128100;</span>
+              <input
+                type="text"
+                ref={ref1}
+                placeholder="Enter your username"
+                className="login-input"
+              />
+            </div>
           </div>
+          <div className="input-wrapper">
+            <label className="label1">Password</label>
+            <div className="input-with-icon">
+              <span className="input-icon">&#128274;</span>
+              <input
+                type="password"
+                ref={ref2}
+                placeholder="Enter your password"
+                className="login-input"
+              />
+            </div>
+          </div>
+          {error && <div className="error-message">{error}</div>}
+          <button className="login-button" onClick={login}><b>Login</b></button>
+          <br /><br />
+          <button className="login-button" onClick={register}><b>Register</b></button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
