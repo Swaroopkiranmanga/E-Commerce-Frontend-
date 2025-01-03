@@ -4,19 +4,19 @@ function Top2() {
       id: 1,
       title: "Exclusive Offer",
       description: "Get 50% off on your first purchase. Limited time offer!",
-      img: "https://via.placeholder.com/300?text=Your+Image+1",
+      img: "https://img.freepik.com/premium-vector/exclusive-offer-banner-design_686319-748.jpg",
     },
     {
       id: 2,
       title: "New Arrivals",
       description: "Check out the latest collection in our store now.",
-      img: "https://via.placeholder.com/300?text=Your+Image+2", 
+      img: "https://media.istockphoto.com/id/1366258243/vector/vector-illustration-new-arrival-label-modern-web-banner-on-yellow-background.jpg?s=612x612&w=0&k=20&c=ddLMrtth5QRoW-jJe8_ozTWmvRejIFlq3cv4BAIq_HQ=", 
     },
     {
       id: 3,
       title: "Special Discounts",
       description: "Save big with our seasonal discounts on all products.",
-      img: "https://via.placeholder.com/300?text=Your+Image+3", 
+      img: "https://img.freepik.com/free-vector/special-offer-creative-sale-banner-design_1017-16284.jpg", 
     },
   ];
 

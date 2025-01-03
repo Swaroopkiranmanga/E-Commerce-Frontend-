@@ -8,36 +8,34 @@ function DarkVariantExample() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?cs=srgb&dl=daylight-environment-forest-459225.jpg&fm=jpg"
+          src="https://ideogram.ai/assets/image/lossless/response/JxSWTd9XRvS3p_aGx9VaGA"
           alt="First slide"
         />
         <Carousel.Caption>
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5></h5>
+          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?cs=srgb&dl=daylight-environment-forest-459225.jpg&fm=jpg"
+          src="https://ideogram.ai/assets/image/lossless/response/dBVvPLFrSUuPmOaiCjbaeQ"
           alt="Second slide"
         />
         <Carousel.Caption>
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h5>Exclusive Products</h5>
+          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?cs=srgb&dl=daylight-environment-forest-459225.jpg&fm=jpg"
+          src="https://ideogram.ai/assets/image/lossless/response/j3xLuH76Q_iQCxGXNxazow"
           alt="Third slide"
         />
         <Carousel.Caption>
-          <h5>Third slide label</h5>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+          <h5>Featured Products</h5>
+          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

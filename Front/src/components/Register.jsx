@@ -18,6 +18,14 @@ const Register = () => {
     return regex.test(password);
   };
 
+  const clearInputs = () => {
+    ref1.current.value = "";
+    ref2.current.value = "";
+    ref3.current.value = "";
+    ref4.current.value = "";
+  };
+
+
   const register = async () => {
     const password = ref2.current.value;
     if (!validatePassword(password)) {
@@ -35,10 +43,12 @@ const Register = () => {
       });
       const { data } = res;
       if (data) {
+
         setUsernameMessage("");
         setPasswordMessage("");
         setEmailMessage("");
         setMobileMessage("");
+        clearInputs();
         setSuccessMessage("Registration Successful!");
       } else {
         setSuccessMessage("Registration Failed.");

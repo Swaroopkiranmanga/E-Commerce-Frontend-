@@ -26,6 +26,11 @@ function NavBar() {
   const need = ()=>{
     navigate ("/");
   }
+
+  const display_product=(result)=>{
+    navigate("/productitem",{state:{result}})
+  }
+  
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary" fixed="top" bg="primary">
@@ -69,7 +74,9 @@ function NavBar() {
         {searchResults.length > 0 && (
           <div className="search-results">
             {searchResults.map((result, index) => (
-              <div key={index} className="search-result-item">
+            <div key={index} className="search-result-item"
+            onClick={() => display_product(result) }
+            >
                 <p>{result.name}</p>
                 <p>{result.description}</p>
               </div>

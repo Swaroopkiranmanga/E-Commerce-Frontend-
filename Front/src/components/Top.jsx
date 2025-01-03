@@ -5,20 +5,26 @@ function Top() {
     const [products, setProducts] = useState([]); 
     const func = async () => {
       const res = await axios.get("http://localhost:8081/api/get/categories");
+      console.log(res);
       let newProducts = [];
-      let counter=0;             
-      for (const element of res.data.category) {
-        for (const element1 of element.subCategory) {
-          newProducts = [...newProducts, ...element1.product];
-          counter += element1.product.length;
-          if(counter>=7){
-            newProducts = newProducts.slice(0, 7);
-            break;
-          }
-          setProducts(newProducts)
-          if(counter>=7) break;
-        }
-      }
+let counter = 0;
+
+for (const element of res.data.category) {
+  for (const element1 of element.subCategory) {
+    newProducts = [...newProducts, ...element1.product];
+    counter += element1.product.length;
+    if (counter >= 6) {
+      newProducts = newProducts.slice(0, 6);
+      break;
+    }
+  }
+  if (counter >= 6) {
+    break;
+  }
+}
+
+// Update the state after the loop to prevent multiple state updates
+setProducts(newProducts);
     };
   
   useEffect(() => {
@@ -40,7 +46,7 @@ function Top() {
                   style={{
                     width: "100%",
                     height: "150px",
-                    objectFit: "cover",
+                    objectFit: "contain",
                   }}
                 />
                 <div className="card-body text-center">
@@ -56,4 +62,3 @@ function Top() {
     );
   }
 export default Top;
-  
