@@ -11,6 +11,7 @@ import Top3 from './components/Top3.jsx';
 import Login from './components/Login.jsx'; 
 import Register from './components/Register.jsx';
 import ProductsPage from './components/ProductsPage.jsx';
+import ProductItem from './components/ProductItem.jsx';
 
 
  
@@ -45,7 +46,7 @@ function App() {
         <Route path="/register" element={<Register />} >
        
         </Route>
-        
+        <Route path="/productitem" element={<ProductItem></ProductItem>}></Route>
       </Routes>
 
       

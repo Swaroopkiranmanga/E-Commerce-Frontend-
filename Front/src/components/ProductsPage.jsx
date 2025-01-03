@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Products.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductsPage = () => {
   const [grocery, setGrocery] = useState([]);
@@ -10,12 +10,13 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState("");
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getGroceries = async () => {
     setLoading(true); // Set loading to true before fetching data
     try {
       const response = await axios.get(
-        `http://localhost:8081/api/products?page=${currentPage}&size=20&subcategoryId=${id}`
+        `http://localhost:8081/api/products?size=20&subcategoryId=${id}`
       );
       const { content } = response.data;
       setGrocery(content || []);
@@ -26,6 +27,11 @@ const ProductsPage = () => {
       setLoading(false); // Set loading to false after fetching data
     }
   };
+
+  const display_singleitem=(groceryItem)=>{
+
+    navigate("/productitem",{state:{groceryItem}})
+  }
 
   useEffect(() => {
     getGroceries();
@@ -54,7 +60,7 @@ const ProductsPage = () => {
             <div
               key={index}
               className="grocery-card-horizontal"
-              onClick={() => console.log("Clicked:", groceryItem)}
+              onClick={() => display_singleitem(groceryItem)}
             >
               <img
                 src={groceryItem.image}
