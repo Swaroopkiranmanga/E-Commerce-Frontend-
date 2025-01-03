@@ -137,7 +137,7 @@ const CategoryComponent = () => {
             padding: 10px;
             text-align: center;
             padding-bottom: 10px;
-            padding-top: 100px;
+            padding-top: 10px;
           }
 
           .image-item {
