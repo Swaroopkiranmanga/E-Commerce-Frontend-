@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./AdminDashboard.css";
+import ProductUpload from "./ProductUpload";
 
 const AdminDashboard = ({ homeContent }) => {
   const { logout } = useAuth0();
@@ -21,7 +22,7 @@ const AdminDashboard = ({ homeContent }) => {
       case "Dashboard":
         return homeContent; 
       case "Product List":
-        return <div>View and manage your Product List here.</div>;
+        return <ProductUpload></ProductUpload>;
       case "Categories":
         return <div>Explore and manage Product Categories here.</div>;
       case "Customers":

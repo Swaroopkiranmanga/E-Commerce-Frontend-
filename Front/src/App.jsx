@@ -65,6 +65,9 @@ import Register from "./components/Register.jsx";
 import ProductsPage from "./components/ProductsPage.jsx";
 import ProductItem from "./components/ProductItem.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
+import UploadProduct from "./components/UploadProduct.jsx";
+import ProductUpload from "./components/ProductUpload.jsx";
+import UpdateProduct from "./components/UpdateProduct.jsx";
 
 function App() {
   return (
@@ -130,6 +133,9 @@ function App() {
             />
           }
         />
+         <Route path="/upload" element={<UploadProduct></UploadProduct>}></Route>
+        <Route path="/productupload" element={<ProductUpload></ProductUpload>}></Route>
+        <Route path="/updateproduct/:productId" element={<UpdateProduct></UpdateProduct>}></Route>
       </Routes>
     </Router>
   );
