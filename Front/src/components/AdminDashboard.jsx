@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   FaSearch,
@@ -8,26 +9,46 @@ import {
   FaCog,
   FaBox,
   FaUsers,
+  FaDollarSign,
 } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
+//import ProductList from "./ProductList"; // Import the ProductList component
+import AdminCategory from "./AdminCategory";
+import AdminSubCategory from "./AdminSubCategory";
 import "./AdminDashboard.css";
-import ProductUpload from "./ProductUpload";
-import Customers from "./Customers";
 
 const AdminDashboard = ({ homeContent }) => {
   const { logout } = useAuth0();
   const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [selectedCategory, setSelectedCategory] = useState("AdminCategory");
 
   const renderContent = () => {
     switch (activeMenu) {
       case "Dashboard":
-        return homeContent; 
+        return homeContent || <div>Welcome to the Dashboard!</div>;
       case "Product List":
-        return <ProductUpload></ProductUpload>;
+        return <ProductList />;
       case "Categories":
-        return <div>Explore and manage Product Categories here.</div>;
+        return (
+          <div>
+            <label htmlFor="category-select">Select Category: </label>
+            <select
+              id="category-select"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="category-dropdown"
+            >
+              <option value="AdminCategory">Admin Category</option>
+              <option value="UserCategory">User Category</option>
+            </select>
+            {selectedCategory === "AdminCategory" && <AdminCategory />}
+            {selectedCategory === "UserCategory" && <AdminSubCategory />}
+          </div>
+        );
+      case "Sales":
+        return <div>Check your Sales data.</div>;
       case "Customers":
-        return <Customers />;;
+        return <div>Manage your Customers.</div>;
       case "Notifications":
         return <div>View all Notifications.</div>;
       case "Settings":
@@ -71,6 +92,14 @@ const AdminDashboard = ({ homeContent }) => {
               </li>
               <li
                 className={`menu-item ${
+                  activeMenu === "Sales" ? "active" : ""
+                }`}
+                onClick={() => setActiveMenu("Sales")}
+              >
+                <FaDollarSign className="menu-icon" /> Sales
+              </li>
+              <li
+                className={`menu-item ${
                   activeMenu === "Customers" ? "active" : ""
                 }`}
                 onClick={() => setActiveMenu("Customers")}
@@ -97,7 +126,7 @@ const AdminDashboard = ({ homeContent }) => {
           </nav>
         </div>
 
-        {/* Logout Section */}
+        {/* Logout Button */}
         <div className="logout-section">
           <button
             onClick={() => logout({ returnTo: "http://localhost:5173" })}
@@ -132,7 +161,7 @@ const AdminDashboard = ({ homeContent }) => {
           </div>
         </nav>
 
-        {/* Dynamic Content */}
+        {/* Main Content */}
         <div className="main-content">{renderContent()}</div>
       </div>
     </div>
@@ -140,3 +169,4 @@ const AdminDashboard = ({ homeContent }) => {
 };
 
 export default AdminDashboard;
+
