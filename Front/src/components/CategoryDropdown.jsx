@@ -15,8 +15,8 @@ const CategoryDropdown = () => {
         onChange={(e) => setSelectedCategory(e.target.value)}
         className="category-dropdown"
       >
-        <option value="AdminCategory">Admin Category</option>
-        <option value="UserCategory">User Category</option>
+        <option value="AdminCategory">Category</option>
+        <option value="UserCategory">Subcategory</option>
       </select>
       {selectedCategory === "AdminCategory" && <AdminCategory />}
       {selectedCategory === "UserCategory" && <AdminSubCategory />}

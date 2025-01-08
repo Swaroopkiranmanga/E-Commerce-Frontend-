@@ -10,7 +10,6 @@ const UpdateProduct = () => {
   const nameRef = useRef(null);
   const priceRef = useRef(null);
   const descriptionRef = useRef(null);
-  const subcategoryIdRef = useRef(null);
   const subcategoryNameRef = useRef(null);
   const brandRef = useRef(null);
   const ratingRef = useRef(null);
@@ -27,7 +26,6 @@ const UpdateProduct = () => {
         nameRef.current.value = product.name;
         priceRef.current.value = product.price;
         descriptionRef.current.value = product.description;
-        subcategoryIdRef.current.value = product.subcategoryId;
         subcategoryNameRef.current.value = product.subcategoryName;
         brandRef.current.value = product.brand;
         ratingRef.current.value = product.rating;
@@ -49,7 +47,6 @@ const UpdateProduct = () => {
       name: nameRef.current.value,
       price: priceRef.current.value,
       description: descriptionRef.current.value,
-      subcategoryId: subcategoryIdRef.current.value,
       subcategoryName: subcategoryNameRef.current.value,
       brand: brandRef.current.value,
       rating: ratingRef.current.value,
@@ -169,15 +166,6 @@ const UpdateProduct = () => {
           placeholder="Enter product description"
           style={styles.textarea}
         ></textarea>
-        <br />
-        <label htmlFor="subcategoryId" style={styles.label}>Subcategory ID:</label>
-        <input
-          type="number"
-          id="subcategoryId"
-          ref={subcategoryIdRef}
-          placeholder="Enter subcategory ID"
-          style={styles.input}
-        />
         <br />
         <label htmlFor="subcategoryName" style={styles.label}>Subcategory Name:</label>
         <input

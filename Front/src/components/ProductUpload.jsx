@@ -4,20 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 const ProductUpload = () => {
   const [content, setContent] = useState([]); // State to hold product data
-  const [currentPage, setCurrentPage] = useState(0); // State to hold the current page
+  const [currentPage, setCurrentPage] = useState(0); // Current page state
+  const [totalPages, setTotalPages] = useState(0); // Total pages from API
   const [itemsPerPage] = useState(8); // Number of items per page
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(""); // Error state
   const navigate = useNavigate();
 
   // Fetch products from the API with pagination
-  const fetchData = async () => {
+  const fetchData = async (page = 0) => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8081/api/products");
-      const { data } = response;
-      const { content } = data;
-      setContent(content || []); // Update the state with the fetched data
+      const response = await axios.get(`http://localhost:8081/api/products?page=${page}&size=${itemsPerPage}`);
+      const { content, totalPages } = response.data;
+      
+      setContent(content || []);
+      setTotalPages(totalPages);
+      setCurrentPage(page);
     } catch (error) {
       setError("Failed to fetch products. Please try again later.");
       console.error("Error fetching data:", error);
@@ -27,7 +30,7 @@ const ProductUpload = () => {
   };
 
   useEffect(() => {
-    fetchData(); // Fetch the initial page of data
+    fetchData(); // Fetch data on initial load
   }, []);
 
   const UpdateProduct = (productId) => {
@@ -36,18 +39,14 @@ const ProductUpload = () => {
 
   const deleteItem = async (productId) => {
     try {
-      // Retrieve the bearer token from local storage
       const token = localStorage.getItem("token");
 
       const response = await axios.delete(`http://localhost:8081/api/products/${productId}`, {
-        headers: {
-          "Authorization": `Bearer ${token}` // Include the bearer token in the Authorization header
-        },
+        headers: { "Authorization": `Bearer ${token}` }
       });
 
       if (response.status === 204) {
-        // If deletion is successful, filter out the deleted product from the state
-        setContent(content.filter(product => product.id !== productId));
+        fetchData(currentPage); // Refetch data after deletion
         alert("Item deleted successfully");
       } else {
         alert("Failed to delete item");
@@ -64,27 +63,22 @@ const ProductUpload = () => {
 
   const Export = async () => {
     try {
-      // Retrieve the bearer token from local storage
       const token = localStorage.getItem("token");
 
       const response = await axios.get("http://localhost:8081/api/products/export", {
-        headers: {
-          "Authorization": `Bearer ${token}` // Include the bearer token in the Authorization header
-        },
-        responseType: 'blob' // Important for handling binary data
+        headers: { "Authorization": `Bearer ${token}` },
+        responseType: "blob",
       });
 
-      // Create a URL for the file and initiate a download
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', 'products_export.csv'); // Specify the file name
+      link.setAttribute("download", "products_export.csv");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
       alert("Export successful!");
-
     } catch (error) {
       console.error("Error exporting data:", error);
       alert("Error exporting data");
@@ -93,15 +87,10 @@ const ProductUpload = () => {
 
   // Function to handle page change
   const handlePageChange = (page) => {
-    if (page >= 0 && page < Math.ceil(content.length / itemsPerPage)) {
-      setCurrentPage(page);
+    if (page >= 0 && page < totalPages) {
+      fetchData(page);
     }
   };
-
-  const paginatedItems = content.slice(
-    currentPage * itemsPerPage,
-    currentPage * itemsPerPage + itemsPerPage
-  );
 
   return (
     <>
@@ -109,93 +98,88 @@ const ProductUpload = () => {
         <button className="upload-btn" onClick={FaUpload}>Upload Products</button>
         <button className="export-btn" onClick={Export}>Export Products</button>
       </div>
-      <table cellPadding={10} cellSpacing={10}>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Qty</th>
-            <th>Image</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedItems.map((product, index) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.description}</td>
-              <td>{product.quantity}</td>
-              <td>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{ width: "50px", height: "50px" }}
-                />
-              </td>
-              <td>
-                <span className="fa fa-edit" width={50} height={50} onClick={() => { UpdateProduct(product.id) }} style={{ cursor: "pointer" }}></span>
-              </td>
-              <td>
-                <span
-                  className="fa fa-trash"
-                  onClick={() => deleteItem(product.id)}
-                  style={{ cursor: 'pointer' }}
-                ></span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {/* Pagination controls */}
-      <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 0}>Previous</button>
-        {Array.from({ length: Math.ceil(content.length / itemsPerPage) }, (_, index) => (
-          <button
-            key={index}
-            className={currentPage === index ? "active" : ""}
-            onClick={() => handlePageChange(index)}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === Math.ceil(content.length / itemsPerPage) - 1}>Next</button>
-      </div>
+
+      {loading ? <p>Loading...</p> : error ? <p>{error}</p> : (
+        <>
+          <table cellPadding={10} cellSpacing={10}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {content.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.description}</td>
+                  <td>{product.quantity}</td>
+                  <td>
+                    <img src={product.image} alt={product.name} style={{ width: "50px", height: "50px" }} />
+                  </td>
+                  <td>
+                    <span className="fa fa-edit" onClick={() => UpdateProduct(product.id)} style={{ cursor: "pointer" }}></span>
+                  </td>
+                  <td>
+                    <span className="fa fa-trash" onClick={() => deleteItem(product.id)} style={{ cursor: "pointer" }}></span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Pagination controls */}
+          <div className="pagination">
+            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 0}>Previous</button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={currentPage === index ? "active" : ""}
+                onClick={() => handlePageChange(index)}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages - 1}>Next</button>
+          </div>
+        </>
+      )}
+
       <style>
         {`
           table {
             width: 100%;
           }
-            th{
-            background-color: lightgray; /* A close "ash" color */
-
-            }
-
-
+          th {
+            background-color: lightgray;
+          }
           th, td {
             border: 1px solid black;
             font-family: 'Lato', sans-serif;
             padding: 8px;
             text-align: center;
-            // border-radius:20px;
           }
           .upload {
             margin: 10px;
-            display:flex;
+            display: flex;
             justify-content: end;
           }
-          .upload-btn{
-              background: #16a34a;
+          .upload-btn {
+            background: #16a34a;
             color: white;
             margin: 10px;
           }
           .export-btn {
-           background: #1a1a1a;
-           color: white;
+            background: #1a1a1a;
+            color: white;
             margin: 10px;
           }
           .pagination {
