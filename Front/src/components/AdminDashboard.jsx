@@ -12,6 +12,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./AdminDashboard.css";
 import ProductUpload from "./ProductUpload";
+import Customers from "./Customers";
 
 const AdminDashboard = ({ homeContent }) => {
   const { logout } = useAuth0();
@@ -26,7 +27,7 @@ const AdminDashboard = ({ homeContent }) => {
       case "Categories":
         return <div>Explore and manage Product Categories here.</div>;
       case "Customers":
-        return <div>Manage your Customers.</div>;
+        return <Customers />;;
       case "Notifications":
         return <div>View all Notifications.</div>;
       case "Settings":

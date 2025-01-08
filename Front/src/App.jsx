@@ -50,7 +50,6 @@
 // export default App;
 
 
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -68,6 +67,9 @@ import AdminDashboard from "./components/AdminDashboard.jsx";
 import UploadProduct from "./components/UploadProduct.jsx";
 import ProductUpload from "./components/ProductUpload.jsx";
 import UpdateProduct from "./components/UpdateProduct.jsx";
+import CustomerCreate from "./components/CustomerCreate.jsx";
+import CustomerUpdate from "./components/CustomerUpdate.jsx";
+import Customers from "./components/Customers.jsx";
 
 function App() {
   return (
@@ -136,6 +138,10 @@ function App() {
          <Route path="/upload" element={<UploadProduct></UploadProduct>}></Route>
         <Route path="/productupload" element={<ProductUpload></ProductUpload>}></Route>
         <Route path="/updateproduct/:productId" element={<UpdateProduct></UpdateProduct>}></Route>
+        <Route path="/customer" element={<Customers />} />
+         {/* Add route for Customers */}
+         <Route path="/customerupdate/:id" element={<CustomerUpdate />} />
+         <Route path="/customercreate" element={<CustomerCreate />} />
       </Routes>
     </Router>
   );
