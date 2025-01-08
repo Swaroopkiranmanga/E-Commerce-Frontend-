@@ -1,0 +1,156 @@
+
+  /* Global Styles */
+  .category-form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-height: 500px; /* Adjust as needed for your layout */
+    overflow-y: auto;  /* Enables vertical scrolling */
+  }
+  
+  /* Scrollbar Styling */
+  .category-form-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .category-form-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    border-radius: 5px;
+  }
+  
+  .category-form-container::-webkit-scrollbar-thumb:hover {
+    background: #16a085;
+  }
+  
+  .category-form-container::-webkit-scrollbar-track {
+    background: #ecf0f1;
+    border-radius: 5px;
+  }
+  
+  /* Title */
+  .title {
+    text-align: center;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  /* Category Form */
+  .category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Form Group */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #7f8c8d;
+  }
+  
+  /* Input Fields */
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #1abc9c;
+  }
+  
+  /* Textarea */
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* File Input */
+  input[type="file"] {
+    font-size: 1rem;
+  }
+  
+  /* Image Preview */
+  .image-preview {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+  }
+  
+  .image-preview img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Save Button */
+  .save-btn,
+  .cancel-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .save-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+  }
+  
+  .save-btn:hover {
+    background-color: #16a085;
+    transform: scale(1.05);
+  }
+  
+  .cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .category-form-container {
+      padding: 15px;
+    }
+  
+    .category-form {
+      gap: 15px;
+    }
+  
+    .title {
+      font-size: 1.8rem;
+    }
+  }
+  

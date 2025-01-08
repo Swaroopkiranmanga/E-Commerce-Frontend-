@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   FaSearch,
@@ -12,6 +13,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import "./AdminDashboard.css";
 import ProductUpload from "./ProductUpload";
+import CategoryDropdown from "./CategoryDropDown";
 import Customers from "./Customers";
 
 const AdminDashboard = ({ homeContent }) => {
@@ -24,8 +26,8 @@ const AdminDashboard = ({ homeContent }) => {
         return homeContent; 
       case "Product List":
         return <ProductUpload></ProductUpload>;
-      case "Categories":
-        return <div>Explore and manage Product Categories here.</div>;
+        case "Categories":
+          return <CategoryDropdown />;  
       case "Customers":
         return <Customers />;;
       case "Notifications":
@@ -39,7 +41,7 @@ const AdminDashboard = ({ homeContent }) => {
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
+    
       <aside className="sidebar">
         <div>
           <div className="sidebar-header">Menu</div>
@@ -97,7 +99,7 @@ const AdminDashboard = ({ homeContent }) => {
           </nav>
         </div>
 
-        {/* Logout Section */}
+        {/* Logout Button */}
         <div className="logout-section">
           <button
             onClick={() => logout({ returnTo: "http://localhost:5173" })}
@@ -108,9 +110,9 @@ const AdminDashboard = ({ homeContent }) => {
         </div>
       </aside>
 
-      {/* Main Content */}
+      
       <div className="content">
-        {/* Header */}
+       
         <nav className="header">
           <div className="header-container">
             <div className="header-title">NeedsForU</div>
@@ -132,7 +134,7 @@ const AdminDashboard = ({ homeContent }) => {
           </div>
         </nav>
 
-        {/* Dynamic Content */}
+        {/* Main Content */}
         <div className="main-content">{renderContent()}</div>
       </div>
     </div>
