@@ -1,156 +1,153 @@
+* General container for both Add and Update category forms */
+.category-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
 
-  /* Global Styles */
+/* Title styling for both pages */
+.category-form-container .title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Form styling for both pages */
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Styling for form group (input and textarea fields) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Label styling */
+.form-group label {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  font-weight: 600;
+}
+
+/* Input fields and textarea styling */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus effect for input fields */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #1abc9c;
+}
+
+/* Textarea specific styling */
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Image preview section */
+.image-preview {
+  margin-top: 10px;
+  max-width: 200px;
+}
+
+.image-preview img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Button container */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Button styling */
+button.save-btn,
+button.cancel-btn {
+  width: 48%;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Save Button (Add / Update) styling */
+button.save-btn {
+  background-color: #1abc9c;
+  color: white;
+}
+
+/* Save Button hover and active states */
+button.save-btn:hover {
+  background-color: #16a085;
+  transform: scale(1.05);
+}
+
+button.save-btn:active {
+  background-color: #16a085;
+  transform: scale(1);
+}
+
+/* Cancel Button styling */
+button.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Cancel Button hover and active states */
+button.cancel-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+button.cancel-btn:active {
+  background-color: #c0392b;
+  transform: scale(1);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
   .category-form-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-height: 500px; /* Adjust as needed for your layout */
-    overflow-y: auto;  /* Enables vertical scrolling */
+    padding: 15px;
   }
-  
-  /* Scrollbar Styling */
-  .category-form-container::-webkit-scrollbar {
-    width: 10px;
+
+  .category-form-container .title {
+    font-size: 1.6rem;
   }
-  
-  .category-form-container::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #1abc9c, #16a085);
-    border-radius: 5px;
-  }
-  
-  .category-form-container::-webkit-scrollbar-thumb:hover {
-    background: #16a085;
-  }
-  
-  .category-form-container::-webkit-scrollbar-track {
-    background: #ecf0f1;
-    border-radius: 5px;
-  }
-  
-  /* Title */
-  .title {
-    text-align: center;
-    font-size: 2rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
-  
-  /* Category Form */
-  .category-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Form Group */
+
   .form-group {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
   }
-  
-  label {
-    font-size: 1rem;
-    color: #7f8c8d;
-  }
-  
-  /* Input Fields */
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
-  }
-  
-  input[type="text"]:focus,
-  textarea:focus {
-    outline: none;
-    border-color: #1abc9c;
-  }
-  
-  /* Textarea */
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  /* File Input */
-  input[type="file"] {
-    font-size: 1rem;
-  }
-  
-  /* Image Preview */
-  .image-preview {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    max-width: 100%;
-  }
-  
-  .image-preview img {
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  /* Form Actions */
+
   .form-actions {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  /* Save Button */
-  .save-btn,
-  .cancel-btn {
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+
+  button {
+    padding: 10px;
   }
-  
-  .save-btn {
-    background-color: #1abc9c;
-    color: white;
-    border: none;
-  }
-  
-  .save-btn:hover {
-    background-color: #16a085;
-    transform: scale(1.05);
-  }
-  
-  .cancel-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-  }
-  
-  .cancel-btn:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
-  }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .category-form-container {
-      padding: 15px;
-    }
-  
-    .category-form {
-      gap: 15px;
-    }
-  
-    .title {
-      font-size: 1.8rem;
-    }
-  }
-  
+}

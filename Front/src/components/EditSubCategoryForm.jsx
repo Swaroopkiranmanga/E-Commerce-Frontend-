@@ -270,11 +270,18 @@ const EditSubCategoryForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter subcategory description"
-            required
+           // required
           ></textarea>
         </div>
 
         <button type="submit">Update Subcategory</button>
+        <button
+          type="button"
+          className="cancel-btn"
+          onClick={() => navigate("/adminsubcategory")}
+  >
+    Cancel
+  </button>
       </form>
     </div>
   );

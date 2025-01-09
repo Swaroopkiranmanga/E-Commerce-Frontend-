@@ -115,6 +115,13 @@ const AddSubCategoryForm = () => {
         </div>
 
         <button type="submit">Add Subcategory</button>
+        <button
+        type="button"
+        className="cancel-btn"
+        onClick={() => navigate("/adminsubcategory")}
+      >
+  Cancel
+</button>
       </form>
     </div>
   );
