@@ -141,3 +141,34 @@
   flex: 1;
   background-color: #f7fafc;
 }
+
+.search-results-container {
+  padding-top: 30px; /* Adjust based on your navbar height */
+  margin-left: 70px; /* Adds space specifically for search results only */
+  max-width: calc(100% - 270px); /* Ensures search results do not overflow */
+}
+
+.search-results {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  max-height: 400px; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.search-result-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item p {
+  margin: 0;
+  padding: 2px 0;
+}

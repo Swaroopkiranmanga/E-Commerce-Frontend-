@@ -1,8 +1,6 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   FaSearch,
-  FaBell,
   FaUser,
   FaCaretDown,
   FaHome,
@@ -10,28 +8,66 @@ import {
   FaBox,
   FaUsers,
 } from "react-icons/fa";
-import { useAuth0 } from "@auth0/auth0-react";
 import "./AdminDashboard.css";
 import ProductUpload from "./ProductUpload";
 import CategoryDropdown from "./CategoryDropDown";
 import Customers from "./Customers";
+import axios from "axios";
 
 const AdminDashboard = ({ homeContent }) => {
-  const { logout } = useAuth0();
   const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null); // New state for selected product
+  const searchQuery = useRef(null);
+
+  // Simpler logout function
+  const logout = () => {
+    window.location.href = "http://localhost:5173"; // Redirect to the login page or desired location
+  };
+
+  const search = async () => {
+    const query = searchQuery.current.value.trim();
+    if (!query) {
+      setSearchResults([]);
+      setSelectedProduct(null); // Clear selected product when search is cleared
+      return;
+    }
+    try {
+      const res = await axios.get(
+        `http://localhost:8081/api/products/search?keyword=${query}`
+      );
+      setSearchResults(res.data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setActiveMenu(null); // Deselect other menus when viewing a product
+  };
 
   const renderContent = () => {
+    if (selectedProduct) {
+      // Render selected product details
+      return (
+        <div>
+          <h2>{selectedProduct.name}</h2>
+          <p>{selectedProduct.description}</p>
+          <p>Price: ${selectedProduct.price}</p>
+        </div>
+      );
+    }
+
     switch (activeMenu) {
       case "Dashboard":
-        return homeContent; 
+        return homeContent;
       case "Product List":
-        return <ProductUpload></ProductUpload>;
-        case "Categories":
-          return <CategoryDropdown />;  
+        return <ProductUpload />;
+      case "Categories":
+        return <CategoryDropdown />;
       case "Customers":
-        return <Customers />;;
-      case "Notifications":
-        return <div>View all Notifications.</div>;
+        return <Customers />;
       case "Settings":
         return <div>Adjust your Settings here.</div>;
       default:
@@ -41,7 +77,7 @@ const AdminDashboard = ({ homeContent }) => {
 
   return (
     <div className="dashboard-container">
-    
+      {/* Sidebar */}
       <aside className="sidebar">
         <div>
           <div className="sidebar-header">Menu</div>
@@ -51,7 +87,10 @@ const AdminDashboard = ({ homeContent }) => {
                 className={`menu-item ${
                   activeMenu === "Dashboard" ? "active" : ""
                 }`}
-                onClick={() => setActiveMenu("Dashboard")}
+                onClick={() => {
+                  setActiveMenu("Dashboard");
+                  setSelectedProduct(null); // Clear selected product when navigating
+                }}
               >
                 <FaHome className="menu-icon" /> Dashboard
               </li>
@@ -59,7 +98,10 @@ const AdminDashboard = ({ homeContent }) => {
                 className={`menu-item ${
                   activeMenu === "Product List" ? "active" : ""
                 }`}
-                onClick={() => setActiveMenu("Product List")}
+                onClick={() => {
+                  setActiveMenu("Product List");
+                  setSelectedProduct(null);
+                }}
               >
                 <FaBox className="menu-icon" /> Product List
               </li>
@@ -67,7 +109,10 @@ const AdminDashboard = ({ homeContent }) => {
                 className={`menu-item ${
                   activeMenu === "Categories" ? "active" : ""
                 }`}
-                onClick={() => setActiveMenu("Categories")}
+                onClick={() => {
+                  setActiveMenu("Categories");
+                  setSelectedProduct(null);
+                }}
               >
                 <FaBox className="menu-icon" /> Categories
               </li>
@@ -75,23 +120,21 @@ const AdminDashboard = ({ homeContent }) => {
                 className={`menu-item ${
                   activeMenu === "Customers" ? "active" : ""
                 }`}
-                onClick={() => setActiveMenu("Customers")}
+                onClick={() => {
+                  setActiveMenu("Customers");
+                  setSelectedProduct(null);
+                }}
               >
                 <FaUsers className="menu-icon" /> Customers
               </li>
               <li
                 className={`menu-item ${
-                  activeMenu === "Notifications" ? "active" : ""
-                }`}
-                onClick={() => setActiveMenu("Notifications")}
-              >
-                <FaBell className="menu-icon" /> Notifications
-              </li>
-              <li
-                className={`menu-item ${
                   activeMenu === "Settings" ? "active" : ""
                 }`}
-                onClick={() => setActiveMenu("Settings")}
+                onClick={() => {
+                  setActiveMenu("Settings");
+                  setSelectedProduct(null);
+                }}
               >
                 <FaCog className="menu-icon" /> Settings
               </li>
@@ -101,31 +144,30 @@ const AdminDashboard = ({ homeContent }) => {
 
         {/* Logout Button */}
         <div className="logout-section">
-          <button
-            onClick={() => logout({ returnTo: "http://localhost:5173" })}
-            className="logout-button"
-          >
+          <button onClick={logout} className="logout-button">
             <FaUser className="menu-icon" /> Log out
           </button>
         </div>
       </aside>
 
-      
+      {/* Content Area */}
       <div className="content">
-       
+        {/* Header */}
         <nav className="header">
           <div className="header-container">
             <div className="header-title">NeedsForU</div>
             <div className="header-actions">
+              {/* Search Bar */}
               <div className="search-container">
                 <input
                   type="text"
                   placeholder="Search..."
                   className="search-input"
+                  ref={searchQuery}
+                  onChange={search}
                 />
                 <FaSearch className="search-icon" />
               </div>
-              <FaBell className="action-icon" />
               <div className="user-profile">
                 <span>Admin</span>
                 <FaCaretDown />
@@ -133,6 +175,24 @@ const AdminDashboard = ({ homeContent }) => {
             </div>
           </div>
         </nav>
+
+        {/* Search Results */}
+        <div className="search-results-container">
+          {searchResults.length > 0 && (
+            <div className="search-results">
+              {searchResults.map((result, index) => (
+                <div
+                  key={index}
+                  className="search-result-item"
+                  onClick={() => handleProductClick(result)} // Set selected product
+                >
+                  <p>{result.name}</p>
+                  <p>{result.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Main Content */}
         <div className="main-content">{renderContent()}</div>
