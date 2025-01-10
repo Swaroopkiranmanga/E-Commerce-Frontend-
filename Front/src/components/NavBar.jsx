@@ -1,30 +1,33 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import { Navbar, Container, Form, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Form, Button, Nav, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
+import { Badge } from 'react-bootstrap';
+import { useCart } from './CartProvider';
 
 function NavBar() {
   const navigate = useNavigate(); 
   const searchQuery = useRef(null);
   const [searchResults, setSearchResults] = useState([]);
+  const { cartCount } = useCart();
+
   const search = async () => {
     const query = searchQuery.current.value.trim();
+
     // Check if the search query is empty
     if (!query) {
       setSearchResults([]);
       return;
     }
+
     try {
-      const res = await axios.get(`http://localhost:8081/api/products/search?keyword=${query}`);
-      setSearchResults(res.data);
+      const res = await axios.get('http://localhost:8081/api/products/search?keyword=${query}');
       console.log(res);
+      setSearchResults(res.data);
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
-  }
-  const need = ()=>{
-    navigate ("/");
   }
 
   const display_product=(result)=>{
@@ -36,7 +39,7 @@ function NavBar() {
       <Navbar expand="lg" className="bg-body-tertiary" fixed="top" bg="primary">
         <Container fluid className="px-3">
           <Navbar.Brand href="#" className="d-flex align-items-center" style={{ paddingLeft: '100px' }}>
-            <span onClick={need}>Needs for you👋</span>
+            <span>Needs for you👋</span>
             <Form className="d-flex ms-4" style={{ width: 'auto' }}>
               <Form.Control
                 type="search"
@@ -47,11 +50,10 @@ function NavBar() {
                 ref={searchQuery}
                 style={{ width: '500px', height: '45px' }} 
               />
-              {/* <Button variant="outline-success" style={{ height: '45px' }}>
-                Search
-              </Button> */}
+              
             </Form>
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center" navbarScroll>
@@ -62,21 +64,22 @@ function NavBar() {
                 <NavDropdown.Item href="#action4">Orders</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">Wishlist</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#action7" className="d-flex align-items-center">
+
+              <Nav.Link href="/cartinvoice" className="d-flex align-items-center">
                 <FaShoppingCart className="me-2" />
                 Cart
+                <Badge pill bg="danger" className="ms-2"> {cartCount} </Badge>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
       <div className="search-results-container">
         {searchResults.length > 0 && (
           <div className="search-results">
             {searchResults.map((result, index) => (
-            <div key={index} className="search-result-item"
-            onClick={() => display_product(result) }
-            >
+              <div key={index} className="search-result-item">
                 <p>{result.name}</p>
                 <p>{result.description}</p>
               </div>
@@ -84,6 +87,7 @@ function NavBar() {
           </div>
         )}
       </div>
+
       <style>
         {`
           .image-grid {
@@ -93,28 +97,33 @@ function NavBar() {
             padding: 10px;
             text-align: center;
             padding-bottom: 10px;
-            padding-top: 10px;
+            padding-top: 100px;
           }
+
           .image-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
           }
+
           .image {
             width: 100px;
             height: 65px;
             object-fit: cover;
             border-radius: 8px;
           }
+
           .image-name {
             margin-top: 10px;
             font-size: 16px;
             color: #333; 
           }
+
           .search-results-container {
             padding-top: 80px; /* Adjust based on your navbar height */
           }
+
           .search-results {
             background-color: #fff;
             border: 1px solid #ccc;
@@ -125,13 +134,16 @@ function NavBar() {
             max-height: 400px; /* Set a maximum height */
             overflow-y: auto; /* Enable vertical scrolling */
           }
+
           .search-result-item {
             padding: 10px;
             border-bottom: 1px solid #eee;
           }
+
           .search-result-item:last-child {
             border-bottom: none;
           }
+
           .search-result-item p {
             margin: 0;
             padding: 2px 0;
@@ -141,4 +153,5 @@ function NavBar() {
     </>
   );
 }
+
 export default NavBar;

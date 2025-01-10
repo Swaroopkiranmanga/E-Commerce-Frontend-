@@ -1,24 +1,34 @@
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./ProductItem.css";
+import { useCart } from "./CartProvider";  // Import the useCart hook
 
 const ProductItem = () => {
   const location = useLocation();
   const { groceryItem, result } = location.state || {};
   const [qty, setQty] = useState(1);
+  const { addToCart } = useCart();  // Get addToCart from the context
 
   const selectedItem = result || groceryItem; // Determine which item to display
 
-  const handleIncrement = () => {
-    if (qty < selectedItem.pqty) {
-      setQty(qty + 1);
+  const handleIncrement = () => { 
+    console.log(selectedItem.quantity);
+    if (qty < selectedItem.quantity) {
+      setQty((qty) => qty + 1); 
     }
-  };
+  }; 
 
-  const handleDecrement = () => {
-    if (qty > 1) {
-      setQty(qty - 1);
-    }
+  const handleDecrement = () => { 
+    if (qty > 1) { 
+      setQty((qty) => qty - 1); 
+    } 
+  }; 
+
+  const handleAddToCart = () => { 
+    alert("Item added successfully");
+    console.log("Item being added:", { ...selectedItem, qty }); 
+    addToCart({ ...selectedItem, qty }); 
   };
 
   return selectedItem ? (
@@ -56,9 +66,8 @@ const ProductItem = () => {
               </button>
             </div>
           </div>
-
           <div className="action-buttons">
-            <button className="add-to-cart">Add to Cart</button>
+            <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
             <button className="buy-now">Buy Now</button>
           </div>
         </div>
