@@ -107,9 +107,13 @@ import UpdateCategory from "./components/UpdateCategory.jsx";
 import AddSubCategoryForm from "./components/AddSubCategoryForm.jsx";
 import EditSubCategoryForm from "./components/EditSubCategoryForm.jsx";
 import AdminSubCategory from "./components/AdminSubCategory.jsx";
+import { CartProvider } from "./components/CartProvider.jsx";
+import CartInvoice from "./components/CartInovice.jsx";
 
 function App() {
   return (
+    
+    <CartProvider>
     <Router>
       <Routes>
        
@@ -186,9 +190,11 @@ function App() {
           <Route path="/add-subcategory" element={<AddSubCategoryForm/>} />
         <Route path="/edit-subcategory/:id" element={<EditSubCategoryForm />} />
         <Route path="/adminsubcategory" element={<AdminSubCategory />} />
+        <Route path="/cartinvoice" element={<CartInvoice />} />
 
       </Routes>
     </Router>
+    </CartProvider>
   );
 }
 

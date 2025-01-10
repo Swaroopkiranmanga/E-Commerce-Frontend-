@@ -1,8 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useCart } from "./CartProvider";
 function Top() {
     const [products, setProducts] = useState([]); 
+    const { addToCart } = useCart(); 
+    const cartfunc=(product) =>{
+      const qty=1;
+      alert("added to cart");
+      addToCart({ ...product, qty })
+    }
     const func = async () => {
       const res = await axios.get("http://localhost:8081/api/get/categories");
       console.log(res);
@@ -52,7 +58,7 @@ setProducts(newProducts);
                 <div className="card-body text-center">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.price}</p>
-                  <button className="btn btn-primary">Add to Cart</button>
+                  <button className="btn btn-primary" onClick={()=>cartfunc(product)}>Add to Cart</button>
                 </div>
               </div>
             ))}
