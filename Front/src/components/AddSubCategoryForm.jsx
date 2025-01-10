@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./AddSubCategoryForm.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddSubCategoryForm = () => {
   const navigate = useNavigate();
@@ -66,63 +66,91 @@ const AddSubCategoryForm = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Add New Subcategory</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Dropdown for selecting a category */}
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select
-            id="category"
-            value={category.id}
-            onChange={(e) => setCategory({ id: e.target.value })}
-            required
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {categories.map((categoryItem) => (
-              <option key={categoryItem.id} value={categoryItem.id}>
-                {categoryItem.name}
-              </option>
-            ))}
-          </select>
-        </div>
+    <div className="container my-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-6 col-md-8 col-sm-12">
+          <div className="card shadow-lg">
+            <div className="card-header bg-primary text-white text-center">
+              <h3>Add New Subcategory</h3>
+            </div>
+            <div className="card-body">
+              <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+                {/* Dropdown for selecting a category */}
+                <div className="mb-3">
+                  <label htmlFor="category" className="form-label">
+                    <strong>Category</strong>
+                  </label>
+                  <select
+                    id="category"
+                    value={category.id}
+                    onChange={(e) => setCategory({ id: e.target.value })}
+                    className="form-select"
+                    required
+                  >
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+                    {categories.map((categoryItem) => (
+                      <option key={categoryItem.id} value={categoryItem.id}>
+                        {categoryItem.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="invalid-feedback">Please select a category.</div>
+                </div>
 
-        {/* Input for subcategory name */}
-        <div className="form-group">
-          <label htmlFor="name">Subcategory Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter subcategory name"
-            required
-          />
-        </div>
+                {/* Input for subcategory name */}
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    <strong>Subcategory Name</strong>
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-control"
+                    placeholder="Enter subcategory name"
+                    required
+                  />
+                  <div className="invalid-feedback">Please enter a subcategory name.</div>
+                </div>
 
-        {/* Input for subcategory description */}
-        <div className="form-group">
-          <label htmlFor="description">Subcategory Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter subcategory description"
-            required
-          ></textarea>
-        </div>
+                {/* Input for subcategory description */}
+                <div className="mb-3">
+                  <label htmlFor="description" className="form-label">
+                    <strong>Subcategory Description</strong>
+                  </label>
+                  <textarea
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="form-control"
+                    placeholder="Enter subcategory description"
+                    rows="4"
+                    required
+                  ></textarea>
+                  <div className="invalid-feedback">Please enter a description.</div>
+                </div>
 
-        <button type="submit">Add Subcategory</button>
-        <button
-        type="button"
-        className="cancel-btn"
-        onClick={() => navigate("/adminsubcategory")}
-      >
-  Cancel
-</button>
-      </form>
+                {/* Buttons */}
+                <div className="d-flex justify-content-between">
+                  <button type="submit" className="btn btn-success w-45">
+                    Add Subcategory
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger w-45"
+                    onClick={() => navigate("/adminsubcategory")}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
