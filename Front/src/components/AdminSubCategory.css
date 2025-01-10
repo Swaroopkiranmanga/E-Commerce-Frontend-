@@ -1,95 +1,85 @@
 .admin-subcategory-container {
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #eef2f7; /* Light Gray-Blue */
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.admin-subcategory-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.admin-header {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.admin-subcategory-header h1 {
+.admin-header h1 {
   font-size: 2rem;
-  color: #333;
+  color: #2d3748; /* Dark Gray */
+  margin-bottom: 10px;
 }
 
 .add-subcategory-btn {
+  margin-top: 10px;
   padding: 10px 20px;
-  background-color: #28a745;
+  background-color: #3182ce; /* Soft Blue */
   color: white;
-  font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .add-subcategory-btn:hover {
-  background-color: #218838;
+  background-color: #2b6cb0; /* Darker Blue */
 }
 
 .subcategory-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
 }
 
 .subcategory-table th,
 .subcategory-table td {
   padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  text-align: center;
+  border: 1px solid #cbd5e0; /* Soft Gray */
 }
 
 .subcategory-table th {
-  background-color: #f8f8f8;
+  background-color: #eef2f7;
   font-weight: bold;
-  color: #555;
+  color: #4a5568; /* Mid-Gray */
 }
 
-.subcategory-table td {
-  background-color: white;
+.edit-icon {
+  color: #3182ce; /* Soft Blue */
+  cursor: pointer;
 }
 
-.subcategory-actions {
+.edit-icon:hover {
+  color: #2b6cb0; /* Darker Blue */
+}
+
+.delete-icon {
+  color: #e53e3e; /* Red */
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: #c53030; /* Darker Red */
+}
+
+.pagination {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  margin: 20px 0;
 }
 
-.subcategory-icon {
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
+.pagination button {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 4px;
 }
 
-.subcategory-icon:hover {
-  color: #007bff;
-}
-
-.update-subcategory-icon {
-  color: #007bff;
-}
-
-.delete-subcategory-icon {
-  color: #dc3545;
-}
-
-.update-subcategory-icon:hover {
-  color: #0056b3;
-}
-
-.delete-subcategory-icon:hover {
-  color: #c82333;
-}
-
-.subcategory-message {
-  text-align: center;
-  font-size: 1rem;
-  color: #333;
-  margin-top: 20px;
+.pagination button.active {
+  background-color: #2b6cb0;
 }

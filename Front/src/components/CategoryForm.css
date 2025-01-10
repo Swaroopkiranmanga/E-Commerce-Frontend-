@@ -1,9 +1,9 @@
-* General container for both Add and Update category forms */
+/* General container for both Add and Update category forms */
 .category-form-container {
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ffffff; /* White */
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
@@ -13,7 +13,7 @@
 .category-form-container .title {
   text-align: center;
   font-size: 2rem;
-  color: #2c3e50;
+  color: #2d3748; /* Dark Gray */
   margin-bottom: 20px;
 }
 
@@ -34,7 +34,7 @@
 /* Label styling */
 .form-group label {
   font-size: 1.1rem;
-  color: #7f8c8d;
+  color: #4a5568; /* Mid-Gray */
   font-weight: 600;
 }
 
@@ -44,7 +44,7 @@
 .form-group select {
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ced4da;
+  border: 1px solid #cbd5e0; /* Soft Gray */
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s ease;
@@ -54,7 +54,7 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #1abc9c;
+  border-color: #3182ce; /* Soft Blue */
 }
 
 /* Textarea specific styling */
@@ -96,35 +96,35 @@ button.cancel-btn {
 
 /* Save Button (Add / Update) styling */
 button.save-btn {
-  background-color: #1abc9c;
+  background-color: #3182ce; /* Soft Blue */
   color: white;
 }
 
 /* Save Button hover and active states */
 button.save-btn:hover {
-  background-color: #16a085;
+  background-color: #2b6cb0; /* Darker Blue */
   transform: scale(1.05);
 }
 
 button.save-btn:active {
-  background-color: #16a085;
+  background-color: #2b6cb0; /* Darker Blue */
   transform: scale(1);
 }
 
 /* Cancel Button styling */
 button.cancel-btn {
-  background-color: #e74c3c;
+  background-color: #e53e3e; /* Red */
   color: white;
 }
 
 /* Cancel Button hover and active states */
 button.cancel-btn:hover {
-  background-color: #c0392b;
+  background-color: #c0392b; /* Darker Red */
   transform: scale(1.05);
 }
 
 button.cancel-btn:active {
-  background-color: #c0392b;
+  background-color: #c0392b; /* Darker Red */
   transform: scale(1);
 }
 

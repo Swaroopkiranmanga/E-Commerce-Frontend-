@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons
 import './Customer.css';
 
 const Customers = () => {
@@ -51,6 +52,50 @@ const Customers = () => {
 
   return (
     <div className='container'>
+      <h2 className='page-title'>List of Users</h2>
+      <div className='d-flex justify-content-end'>
+        <Link to="/customercreate" className='btn btn-success add-btn'>+ Add</Link>
+      </div>
+      <div className='table-container'>
+        <table className='table table-striped'>
+          <thead className='head'>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>PhoneNumber</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody className='body'>
+            {users.map((user, index) => (
+              <tr key={index}>
+                <td>{user.id}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>{user.phoneNumber}</td>
+                <td>
+                  <FaEdit
+                    className='icon update-icon'
+                    onClick={() => navigate(`/customerupdate/${user.id}`)}
+                    title="Edit"
+                  />
+                </td>
+                <td>
+                  <FaTrashAlt
+                    className='icon delete-icon'
+                    onClick={() => handleDelete(user.id)}
+                    title="Delete"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className='pagination-wrapper'>
         {totalPages > 1 && (
           <div className='pagination'>
@@ -64,44 +109,9 @@ const Customers = () => {
           </div>
         )}
       </div>
-      <div className='mt-3'>
-        <h2 className='name'>List of Users</h2>
-        <div className='d-flex justify-content-end'>
-          <Link to="/customercreate" className='btn btn-success'>+ Add</Link>
-        </div>
-        <table className='table table-striped'>
-          <thead className='head'>
-            <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>PhoneNumber</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody className='body'>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>{user.id}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>{user.phoneNumber}</td>
-                <td>
-                  <button className='btn btn-sm btn-primary' onClick={() => navigate(`/customerupdate/${user.id}`)}>Update</button>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(user.id)} className='btn btn-sm btn-danger'>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 };
 
 export default Customers;
+

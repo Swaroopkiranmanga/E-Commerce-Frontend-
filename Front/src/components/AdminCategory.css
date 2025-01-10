@@ -1,6 +1,6 @@
 .admin-category-container {
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #eef2f7; /* Light Gray-Blue */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -9,7 +9,7 @@
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
+    color: #2d3748; /* Dark Gray */
 }
 
 .add-btn {
@@ -17,7 +17,7 @@
     width: 200px;
     margin: 0 auto 20px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #3182ce; /* Primary color */
     color: white;
     font-size: 1rem;
     border: none;
@@ -27,7 +27,7 @@
 }
 
 .add-btn:hover {
-    background-color: #0056b3;
+    background-color: #2b6cb0; /* Hover color */
 }
 
 .category-table {
@@ -40,7 +40,8 @@
 .category-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #cbd5e0; /* Border color */
+    color: #2d3748; /* Dark Gray Text */
 }
 
 .category-table th {
@@ -73,15 +74,15 @@
 }
 
 .icon:hover {
-    color: #007bff;
+    color: #3182ce; /* Primary Color */
 }
 
 .update-icon {
-    color: #28a745;
+    color: #28a745; /* Green for Edit */
 }
 
 .delete-icon {
-    color: #dc3545;
+    color: #e53e3e; /* Red for Delete */
 }
 
 .update-icon:hover {
@@ -89,5 +90,5 @@
 }
 
 .delete-icon:hover {
-    color: #c82333;
+    color: #c53030;
 }
