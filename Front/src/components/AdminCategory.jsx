@@ -49,7 +49,7 @@ const AdminCategory = () => {
         <div className="col-lg-10 col-md-12">
           <div className="card shadow-lg">
             <div className="card-header bg-primary text-white text-center">
-              <h3>Admin Categories</h3>
+              <h3>Category</h3>
             </div>
             <div className="card-body">
               <div className="d-flex justify-content-end mb-4">

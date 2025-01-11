@@ -65,6 +65,7 @@ const Customers = () => {
               <th>Email</th>
               <th>Password</th>
               <th>PhoneNumber</th>
+              <th>Role</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -77,6 +78,7 @@ const Customers = () => {
                 <td>{user.email}</td>
                 <td>{user.password}</td>
                 <td>{user.phoneNumber}</td>
+                <td>{user.role}</td>
                 <td>
                   <FaEdit
                     className='icon update-icon'
@@ -109,9 +111,9 @@ const Customers = () => {
           </div>
         )}
       </div>
+     
     </div>
   );
 };
 
 export default Customers;
-

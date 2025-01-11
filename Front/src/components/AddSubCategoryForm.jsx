@@ -141,7 +141,7 @@ const AddSubCategoryForm = () => {
                   <button
                     type="button"
                     className="btn btn-outline-danger w-45"
-                    onClick={() => navigate("/adminsubcategory")}
+                    onClick={() => navigate("/adminDashboard")}
                   >
                     Cancel
                   </button>

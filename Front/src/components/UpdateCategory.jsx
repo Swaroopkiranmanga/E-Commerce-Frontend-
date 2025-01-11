@@ -164,7 +164,7 @@ const UpdateCategoryForm = () => {
               <button
                 type="button"
                 className="btn btn-outline-danger w-45"
-                onClick={() => navigate("/admin-categories")}
+                onClick={() => navigate("/adminDashboard")}
               >
                 <FaTimes className="me-2" />
                 Cancel

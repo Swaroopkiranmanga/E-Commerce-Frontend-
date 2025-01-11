@@ -22,7 +22,7 @@ function NavBar() {
     }
 
     try {
-      const res = await axios.get('http://localhost:8081/api/products/search?keyword=${query}');
+      const res = await axios.get(`http://localhost:8081/api/products/search?keyword=${query}`);
       console.log(res);
       setSearchResults(res.data);
     } catch (error) {
@@ -79,7 +79,8 @@ function NavBar() {
         {searchResults.length > 0 && (
           <div className="search-results">
             {searchResults.map((result, index) => (
-              <div key={index} className="search-result-item">
+            <div key={index} className="search-result-item"
+            onClick={() => display_product(result) }>
                 <p>{result.name}</p>
                 <p>{result.description}</p>
               </div>
@@ -87,7 +88,6 @@ function NavBar() {
           </div>
         )}
       </div>
-
       <style>
         {`
           .image-grid {

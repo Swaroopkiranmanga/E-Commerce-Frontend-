@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 // Create Context
 const CartContext = createContext();
@@ -54,7 +54,8 @@ export const CartProvider = ({ children }) => {
       if (!itemToRemove) return prevCart;
 
       const updatedCart = prevCart.filter((cartItem) => cartItem.id !== id);
-      setTotalCost((prevCost) => prevCost - itemToRemove.price * itemToRemove.qty);
+      setCartCount(updatedCart.length);
+      setTotalCost((prevCost) => Math.max(0, prevCost - itemToRemove.price * itemToRemove.qty));
       localStorage.removeItem('totalCost')
       localStorage.setItem('totalCost', JSON.stringify(totalCost));
       return updatedCart;
