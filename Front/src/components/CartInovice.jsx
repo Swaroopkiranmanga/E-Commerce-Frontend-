@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import axios from "axios"
 import { useCart } from "./CartProvider";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,10 @@ import "./CartInvoice.css";
 const CartInvoice = () => {
 
   const handlePayment = async () => {
+    if(localStorage.getItem('token')==null){
+      navigate('/login')
+      return;
+    }
     try {
       const orderResponse = await axios.post("http://localhost:8081/create-order", {
         amount: totalCost, // Amount in INR
@@ -17,15 +21,15 @@ const CartInvoice = () => {
       const { id: order_id, amount, currency } = orderResponse.data;
 
       const options = {
-        key: "rzp_live_0CAWJFt3q8oaUX",
+        key: "rzp_test_iAdqdkUeEVN2MW",
         amount,
         currency,
-        name: "Your Company",
+        name: "Needs for you",
         description: "Test Transaction",
         order_id,
         handler: async (response) => {
           const verifyResponse = await axios.post(
-            "http://localhost:9090/verify-payment",
+            "http://localhost:8081/verify-payment",
             {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
@@ -34,7 +38,10 @@ const CartInvoice = () => {
           );
 
           if (verifyResponse.status === 200) {
+            localStorage.removeItem("cart");
+            localStorage.removeItem("totalCost")
             alert("Payment Successful!");
+            navigate("/");
           } else {
             alert("Payment Verification Failed!");
           }
@@ -42,7 +49,7 @@ const CartInvoice = () => {
         prefill: {
           name: "Test User",
           email: "test@example.com",
-          contact: "9999999999",
+          contact: "8317698234",
         },
         theme: {
           color: "#3399cc",
@@ -60,6 +67,9 @@ const CartInvoice = () => {
   const { cart, totalCost,removeFromCart} = useCart();
   const navigate = useNavigate();
   
+  useEffect(()=>{
+    console.log(localStorage.getItem('token'));
+  })
 
   if (cart.length === 0) {
     return (
